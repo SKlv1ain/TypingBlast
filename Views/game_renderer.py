@@ -6,7 +6,7 @@ class GameRenderer:
     def __init__(self, screen):
         self.screen = screen
         self.sprite_group = pg.sprite.Group()
-        # Create rocket
+        
         self.rocket = Rocket(screen.rect)
         self.sprite_group.add(self.rocket)
 
@@ -26,11 +26,13 @@ class GameRenderer:
 
     def update(self):
         self.sprite_group.update()
+        
+
 
     def draw(self):
         # Draw black background
         self.screen.image.fill((0, 0, 0))
-        
+
         # First draw enemies (words)
         words = [sprite for sprite in self.sprite_group if isinstance(sprite, Word)]
         for word in words:

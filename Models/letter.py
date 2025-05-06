@@ -1,5 +1,5 @@
 import pygame as pg
-from Utils.game_utils import sprite2particles
+from .affects import sprite2particles
 
 class Letter(pg.sprite.Sprite):
     def __init__(self, letter, *groups):

@@ -10,9 +10,7 @@ class MenuController:
                 return "quit"
             elif event.type == pg.MOUSEBUTTONDOWN:
                 pos = pg.mouse.get_pos()
-                for name, rect in self.menu_view.buttons.items():
+                for name, rect in self.menu_view.buttons:
                     if rect.collidepoint(pos):
-                        return name.lower()  # "start", "stats", "quit"
+                        return name.lower()  # returns "start", "stats", "quit"
         return "menu"
-
-

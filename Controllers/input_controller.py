@@ -13,12 +13,12 @@ class Dispatcher:
         return getattr(self, attrname)
 
 class InputController(Dispatcher):
-    def __init__(self, game_controller):
+    def __init__(self, input_handler):
         super().__init__(None)
-        self.game_controller = game_controller
+        self.input_handler = input_handler
 
     def on_keydown(self, event):
         if event.key == pg.K_ESCAPE:  # type: ignore
             pg.event.post(pg.event.Event(pg.QUIT))  # type: ignore
         else:
-            self.game_controller.handle_input(event.unicode) 
+            self.input_handler.handle_input(event.unicode) 
