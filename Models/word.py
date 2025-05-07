@@ -32,7 +32,7 @@ class Word:
 
         # state variables
         self.is_being_typed = False
-        self.already_destroyed = False  # ✅ Track destruction once
+        self.already_destroyed = False 
 
         self.calculate_direction()
 
@@ -64,7 +64,7 @@ class Word:
         return bool(self.letters)
 
     def is_hit(self, letter):
-        return self.letters and letter == self.letters[0]
+        return self.letters and letter.lower() == self.letters[0].lower()
 
     def rect(self):
         return wrap(self.rects())
@@ -84,6 +84,7 @@ class Word:
         self.current_speed = max(self.typing_speed, self.current_speed * 0.8)
         self.reset_timer = 0
         return True
+
 
     def get_target_position(self):
         if self.sprites:
@@ -118,7 +119,7 @@ class Word:
         for sprite in self.sprites:
             sprite.kill()
         self.sprites.clear()
-        self.already_destroyed = True  # ✅ Mark as destroyed
+        self.already_destroyed = True  
 
     def get_sprites(self):
         return self.sprites

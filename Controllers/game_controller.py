@@ -77,7 +77,7 @@ class GameController:
                 self.stats.record_incorrect()
         else:
             for word in self.words:
-                if word.shoot(letter):
+                if word.shoot(letter.lower()):
                     self.locked_word = word
                     self.sound_manager.play_typing_sound()
                     self.spawn_bullet(word)

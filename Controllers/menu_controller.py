@@ -12,5 +12,5 @@ class MenuController:
                 pos = pg.mouse.get_pos()
                 for name, rect in self.menu_view.buttons:
                     if rect.collidepoint(pos):
-                        return name.lower()  # returns "start", "stats", "quit"
+                        return name.lower()  
         return "menu"

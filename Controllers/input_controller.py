@@ -18,7 +18,8 @@ class InputController(Dispatcher):
         self.input_handler = input_handler
 
     def on_keydown(self, event):
-        if event.key == pg.K_ESCAPE:  # type: ignore
-            pg.event.post(pg.event.Event(pg.QUIT))  # type: ignore
-        else:
-            self.input_handler.handle_input(event.unicode) 
+        if event.key == pg.K_ESCAPE:
+            pg.event.post(pg.event.Event(pg.QUIT))
+        elif event.unicode.isalpha():
+            self.input_handler.handle_input(event.unicode)
+
