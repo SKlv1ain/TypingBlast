@@ -5,7 +5,7 @@ from .letter import Letter
 from Utils.layout import align, wrap
 
 class Word:
-    def __init__(self, letters, target_pos):
+    def __init__(self, letters, target_pos, speed=0.5):
         self.original = letters
         self.letters = self.original
         self.sprites = list(map(Letter, self.letters))
@@ -21,8 +21,8 @@ class Word:
         self.dx = 0
         self.dy = 0
 
-        # speed settings
-        self.normal_speed = 1.5
+        # speed settings 
+        self.normal_speed = speed
         self.typing_speed = 0.5
         self.current_speed = self.normal_speed
 
@@ -35,6 +35,7 @@ class Word:
         self.already_destroyed = False 
 
         self.calculate_direction()
+
 
     def calculate_direction(self):
         if not self.sprites:
@@ -113,6 +114,8 @@ class Word:
             first_sprite.rect.x += movement_x
             first_sprite.rect.y += movement_y
             self.align()
+            
+        
 
     def explode(self):
         self.letters = ""

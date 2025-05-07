@@ -11,6 +11,7 @@ class GameStats:
         self.words_destroyed = 0
         self.max_combo = 0
         self.current_combo = 0
+        self.wave = 1
 
     def start_timer(self):
         if self.start_time is None:
@@ -27,6 +28,12 @@ class GameStats:
 
     def record_word_destroyed(self):
         self.words_destroyed += 1
+        
+    def next_wave(self):
+        self.wave += 1
+
+    def get_wave(self):
+        return self.wave
 
     def calculate_wpm(self):
         if not self.start_time:
@@ -48,5 +55,6 @@ class GameStats:
             "Words Destroyed": self.words_destroyed,
             "Max Combo": self.max_combo,
             "Score": self.calculate_score(),
-            "Typing Errors": self.incorrect_keystrokes
+            "Typing Errors": self.incorrect_keystrokes,
+            "Wave": self.wave   
         }

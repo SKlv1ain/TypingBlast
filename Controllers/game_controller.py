@@ -8,33 +8,57 @@ from Models.bullet import Bullet
 from Models.game_stats import GameStats
 
 from Views.dashboard_view import DashboardView
+from Views.wave_view import WaveView
 
-from Utils.randomizer import randomxy, randomresolve
+from Utils.wordspawner import WordSpawner
 from Utils.sound_manager import SoundManager
 
 class GameController:
-    def __init__(self, renderer, rocket_pos=(400, 500), nwords=3):
+    def __init__(self, renderer, rocket_pos=(400, 500), nwords=5):
         self.renderer = renderer
 
         self.hits = 0
         self.max_hits = 3
         self.is_game_over = False
+        
+        self.wave_delay = 60  # frames (1 วินาทีถ้าใช้ tick(60))
+        self.wave_timer = 0
+        
+        self.wave_message_timer = 0
+        self.wave_font = pg.font.Font(None, 64)
+
+
 
         self.words = []
         self.locked_word = None
         self.nwords = nwords
+        self.last_wave_words_destroyed = 0
+
+
 
         self.rocket_pos = rocket_pos
         self.bullets = pg.sprite.Group()
 
         self.sound_manager = SoundManager()
         self.word_list = []
+        
         self.stats = GameStats()
+        self.calculate_wave_parameters()
+
         
         self.dashboard = DashboardView(renderer.screen)
-
+        self.wave_view = WaveView()
 
         self.load_words()
+        
+    def calculate_wave_parameters(self):
+        wave = self.stats.get_wave()
+        
+        self.nwords = min(1 + wave, 12)  # spawn ได้สูงสุด 12 คำ
+        self.word_speed = min(1.5 + 0.2 * (wave - 1), 4.0)  # เพิ่มความเร็วตาม wave
+
+        print(f"[Wave {wave}] max words: {self.nwords}, word speed: {self.word_speed}")
+
 
     def load_words(self, path='/usr/share/dict/words'):
         with open(path) as f:
@@ -43,17 +67,17 @@ class GameController:
         self.word_list = words
 
     def spawn_word(self):
-        letters = next(w for w in self.word_list if not any(word.letters == w for word in self.words))
-        word = Word(letters, self.rocket_pos)
-        rect = word.rect()
-        spawn_area = pg.Rect(100, -4 * rect.height, 700, rect.height)
-        rect.topleft = randomxy(spawn_area)
-        randomresolve(rect, spawn_area, [w.rect() for w in self.words])
-        word.sprites[0].rect.topleft = rect.topleft
-        word.y = word.sprites[0].rect.y
-        word.align()
+        while True:
+            letters = random.choice(self.word_list)
+            if not any(word.letters == letters for word in self.words):
+                break
+
+        word = Word(letters, self.rocket_pos, speed=self.word_speed)
+        WordSpawner.place_word(word, self.words)
         self.renderer.add_sprites(word.get_sprites())
         self.words.append(word)
+
+
 
     def spawn_bullet(self, target_word):
         bullet = Bullet(self.rocket_pos, target_word.get_target_position())
@@ -109,13 +133,35 @@ class GameController:
                 if word == self.locked_word:
                     self.locked_word = None
 
+            # check if the word is out of bounds
+            if (
+                self.stats.words_destroyed > 0 and  # only check if at least one word has been destroyed
+                self.stats.words_destroyed % 10 == 0 and 
+                self.stats.words_destroyed != self.last_wave_words_destroyed
+            ):
+                self.wave_timer += 1
+                if self.wave_timer >= self.wave_delay:
+                    self.stats.next_wave()
+                    self.last_wave_words_destroyed = self.stats.words_destroyed  
+                    self.calculate_wave_parameters()
+                    self.wave_timer = 0
+                    self.sound_manager.play_wave_sound()
+                    self.wave_view.trigger()
+
+
         if self.hits >= self.max_hits:
+            if not self.is_game_over:
+                self.sound_manager.play_game_over_sound()
             self.is_game_over = True
 
         self.bullets.update()
         self.words = [w for w in self.words if w.is_alive()]
         self.renderer.update()
-        self.dashboard.draw(self.stats.export()) 
+        self.dashboard.draw(self.stats.export())
+        
+        self.wave_view.draw(self.renderer.screen.image, self.stats.get_wave())
+
+
 
     def is_over(self):
         return self.is_game_over

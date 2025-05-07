@@ -28,3 +28,10 @@ class SoundManager:
         """Play error sound when wrong key is pressed"""
         if "error" in self.sounds:
             self.sounds["error"].play() 
+            
+    def play_wave_sound(self):
+        pg.mixer.Sound("assets/sounds/wave_up.wav").play()
+
+    def play_game_over_sound(self):
+        pg.mixer.Sound("assets/sounds/game_over.wav").play()
+
