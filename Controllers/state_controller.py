@@ -7,6 +7,7 @@ from Views.menu import MenuView
 from Views.game_renderer import GameRenderer
 from Views.gameover_view import GameOverView
 
+from Views.stats_view import StatsView
 
 import pygame as pg
 
@@ -25,7 +26,7 @@ class StateController:
             elif self.state == "start":
                 self.state = self.run_game()
             elif self.state == "stats":
-                print("Stats coming soon...")
+                self.run_stats()
                 self.state = "menu"
             elif self.state == "quit":
                 break
@@ -72,7 +73,17 @@ class StateController:
 
         
     def run_stats(self):
-        ...
+        stats_view = StatsView(self.screen)
+        running = True
+        while running:
+            self.clock.tick()
+            for event in pg.event.get():
+                result = stats_view.handle_event(event)
+                if result == "menu":
+                    running = False
+            stats_view.draw()
+
+
 
       
 
