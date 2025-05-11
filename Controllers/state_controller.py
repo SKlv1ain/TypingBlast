@@ -2,15 +2,14 @@ from Controllers.menu_controller import MenuController
 from Controllers.game_controller import GameController
 from Controllers.input_controller import InputController
 
-
 from Views.menu import MenuView
 from Views.game_renderer import GameRenderer
 from Views.gameover_view import GameOverView
 
-from Views.stats_view import StatsView
+import subprocess
+import sys
 
 import pygame as pg
-
 from Utils.save_to_csv import save_to_csv
 
 class StateController:
@@ -72,16 +71,11 @@ class StateController:
         return GameOverView(self.screen).show(final_stats)
 
         
+
     def run_stats(self):
-        stats_view = StatsView(self.screen)
-        running = True
-        while running:
-            self.clock.tick()
-            for event in pg.event.get():
-                result = stats_view.handle_event(event)
-                if result == "menu":
-                    running = False
-            stats_view.draw()
+        pg.quit()
+        subprocess.Popen([sys.executable, "tkinter_dashboard.py"])
+        sys.exit()  
 
 
 

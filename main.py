@@ -1,10 +1,7 @@
 import pygame as pg
-
 from Utils.config import ArgumentParser
 from Utils.clock import Clock
-
 from Views.screen import Screen
-
 from Controllers.state_controller import StateController
 
 class GameApp:

@@ -1,4 +1,3 @@
-# === Updated game_controller.py: correct word destroyed count ===
 import random
 import pygame as pg
 from pygame import Rect
@@ -21,20 +20,17 @@ class GameController:
         self.max_hits = 3
         self.is_game_over = False
         
-        self.wave_delay = 60  # frames (1 วินาทีถ้าใช้ tick(60))
+        self.wave_delay = 60
         self.wave_timer = 0
         
         self.wave_message_timer = 0
         self.wave_font = pg.font.Font(None, 64)
 
 
-
         self.words = []
         self.locked_word = None
         self.nwords = nwords
         self.last_wave_words_destroyed = 0
-
-
 
         self.rocket_pos = rocket_pos
         self.bullets = pg.sprite.Group()
@@ -54,8 +50,8 @@ class GameController:
     def calculate_wave_parameters(self):
         wave = self.stats.get_wave()
         
-        self.nwords = min(1 + wave, 12)  # spawn ได้สูงสุด 12 คำ
-        self.word_speed = min(1.5 + 0.2 * (wave - 1), 4.0)  # เพิ่มความเร็วตาม wave
+        self.nwords = min(1 + wave, 12)  
+        self.word_speed = min(1.5 + 0.2 * (wave - 1), 4.0) 
 
         print(f"[Wave {wave}] max words: {self.nwords}, word speed: {self.word_speed}")
 
@@ -76,8 +72,6 @@ class GameController:
         WordSpawner.place_word(word, self.words)
         self.renderer.add_sprites(word.get_sprites())
         self.words.append(word)
-
-
 
     def spawn_bullet(self, target_word):
         bullet = Bullet(self.rocket_pos, target_word.get_target_position())
@@ -132,8 +126,7 @@ class GameController:
                 self.stats.record_word_destroyed()
                 if word == self.locked_word:
                     self.locked_word = None
-
-            # check if the word is out of bounds
+                    
             if (
                 self.stats.words_destroyed > 0 and  # only check if at least one word has been destroyed
                 self.stats.words_destroyed % 10 == 0 and 

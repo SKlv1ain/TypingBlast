@@ -23,8 +23,6 @@ class DashboardView:
         ]
 
         x, y = self.position
-
-
         
         for i, line in enumerate(lines):
             text = self.font.render(line, True, self.color)

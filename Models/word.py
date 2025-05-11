@@ -127,15 +127,3 @@ class Word:
     def get_sprites(self):
         return self.sprites
 
-    def draw(self, surface):
-        if hasattr(self, 'enemy_image'):
-            rect = self.rect()
-            enemy_rect = self.enemy_image.get_rect()
-            enemy_rect.center = rect.center
-            surface.blit(self.enemy_image, enemy_rect)
-            pg.draw.rect(surface, (255, 0, 0), enemy_rect, 1)
-        else:
-            print("No enemy image")
-
-        for sprite in self.sprites:
-            surface.blit(sprite.image, sprite.rect)
