@@ -37,8 +37,6 @@ The game is implemented in Python using the Pygame library, following the **MVC 
 ### UML Class Diagram
 
 > Embed this on TPM using the following HTML tag:
-```html
 <img src="https://github.com/sklv1ain/TypingBlast/raw/main/uml.png" alt="UML Class Diagram">
-```
 
 You can find the full source code and documentation in the [TypingBlast GitHub Repository](https://github.com/SKlv1ain/TypingBlast).
