@@ -27,6 +27,12 @@ You pilot a spaceship in a scrolling starfield. Enemies in the form of **words**
   <img src="screenshot/visualization/2.png" width="400"/>
   <img src="screenshot/visualization/3.png" width="400"/>
   <img src="screenshot/visualization/4.png" width="400"/>
+  <img src="screenshot/visualization/5.png" width="400"/>
+  <img src="screenshot/visualization/6.png" width="400"/>
+  <img src="screenshot/visualization/7.png" width="400"/>
+  <img src="screenshot/visualization/8.png" width="400"/>
+  <img src="screenshot/visualization/9.png" width="400"/>
+  <img src="screenshot/visualization/10.png" width="400"/>
 </div>
 
 **Features:**
