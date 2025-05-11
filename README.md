@@ -195,12 +195,38 @@ pandas>=1.3.0
 numpy>=1.21.0
 ```
 
-Install them via pip:
+## How to run the application
 
-```bash
-pip install -r requirements.txt
-```
+1. Clone the repository
+    ```bash
+    git clone https://github.com/SKlv1ain/TypingBlast.git
+    ```
+2. cd into the project directory
+    ```bash
+    cd TypingBlast
+    ```
+3. Create a virtual environment by running the following command in the terminal:
+    ```bash
+    python -m venv venv
+    ```
+4. Activate the virtual environment by running the following command in the terminal:
 
+    **MacOS or Linux:**
+    ```bash
+    source venv/bin/activate
+    ```
+    **Windows:**
+    ```bash
+    venv\Scripts\activate
+    ```
+5. Install the required packages by running the following command in the terminal:
+    ```bash
+    pip install -r requirements.txt
+    ```
+6. Run the application by executing the following command:
+    ```bash
+    python main.py
+    ```
 ---
 
 ## How to Play
