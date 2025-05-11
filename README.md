@@ -7,6 +7,27 @@ Typing Blast is an arcade-style typing shooter game built with Python and Pygame
 ## Game Concept
 
 You pilot a spaceship in a scrolling starfield. Enemies in the form of **words** slowly descend toward your base. To destroy them, you must **type each word correctly**. Every correctly typed letter fires a bullet. The game becomes progressively harder as waves increase, challenging both your typing speed and precision.
+---
+
+## Screenshots
+
+### Gameplay Preview
+
+<div align="center">
+  <img src="screenshot/gameplay/1.png" width="400"/>
+  <img src="screenshot/gameplay/2.png" width="400"/>
+  <img src="screenshot/gameplay/3.png" width="400"/>
+  <img src="screenshot/gameplay/4.png" width="400"/>
+</div>
+
+### Data Visualization Dashboard
+
+<div align="center">
+  <img src="screenshot/visualization/1.png" width="400"/>
+  <img src="screenshot/visualization/2.png" width="400"/>
+  <img src="screenshot/visualization/3.png" width="400"/>
+  <img src="screenshot/visualization/4.png" width="400"/>
+</div>
 
 **Features:**
 
