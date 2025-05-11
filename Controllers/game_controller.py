@@ -58,7 +58,7 @@ class GameController:
 
     def load_words(self, path='/usr/share/dict/words'):
         with open(path) as f:
-            words = [w.strip() for w in f if 4 <= len(w.strip()) <= 6 and w.strip().isalpha()]
+            words = [w.strip().lower() for w in f if 4 <= len(w.strip()) <= 6 and w.strip().isalpha()]
         random.shuffle(words)
         self.word_list = words
 
