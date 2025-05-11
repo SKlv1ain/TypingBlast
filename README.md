@@ -90,6 +90,11 @@ TypingBlast/
 ├── results.csv              # Game stats saved after each run
 └── README.md                # This file
 ```
+---
+
+### UML Class Diagram
+
+![UML Class Diagram](./uml.png)
 
 ---
 
